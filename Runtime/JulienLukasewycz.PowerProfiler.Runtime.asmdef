@@ -1,6 +1,6 @@
 {
-    "name": "JulienLukasewycz.PowerProfiler.Runtime",
-    "rootNamespace": "",
+    "name": "PowerProfiler.Runtime",
+    "rootNamespace": "PowerProfiler.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

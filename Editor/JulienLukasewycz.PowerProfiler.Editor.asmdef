@@ -1,6 +1,6 @@
 {
-    "name": "JulienLukasewycz.PowerProfiler.Editor",
-    "rootNamespace": "",
+    "name": "PowerProfiler.Editor",
+    "rootNamespace": "PowerProfiler.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"
