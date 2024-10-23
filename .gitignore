@@ -234,7 +234,7 @@ _pkginfo.txt
 # Others
 ClientBin/
 ~$*
-*~
+#*~
 *.dbmdl
 *.dbproj.schemaview
 *.jfm
@@ -398,3 +398,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.idea/
