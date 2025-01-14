@@ -1,6 +1,6 @@
 ﻿using LibreHardwareMonitor.Hardware;
 
-namespace SystemMetricsProfiler;
+namespace HardwarePowerProfiler;
 
 internal class UpdateVisitor : IVisitor
 {
