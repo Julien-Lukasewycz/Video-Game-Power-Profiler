@@ -9,4 +9,12 @@
       <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.4" />
     </ItemGroup>
 
+    <ItemGroup>
+        <BuildFiles Include="bin\Debug\**\*.*"/>
+    </ItemGroup>
+
+    <Target Name="CopyBuildFiles" AfterTargets="Build">
+        <Copy SourceFiles="@(BuildFiles)" DestinationFolder="..\..\Runtime\Packages"/>
+    </Target>
+
 </Project>
