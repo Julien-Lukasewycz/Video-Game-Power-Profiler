@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardwarePowerProfiler", "HardwarePowerProfiler.csproj", "{1DFDC9F8-88F6-4EE6-A612-9D9C61040B76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardwarePowerProfiler", "HardwarePowerProfiler.csproj", "{D9445C19-EFCD-4035-871E-C4DAD6F87A9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1DFDC9F8-88F6-4EE6-A612-9D9C61040B76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DFDC9F8-88F6-4EE6-A612-9D9C61040B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DFDC9F8-88F6-4EE6-A612-9D9C61040B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DFDC9F8-88F6-4EE6-A612-9D9C61040B76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9445C19-EFCD-4035-871E-C4DAD6F87A9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9445C19-EFCD-4035-871E-C4DAD6F87A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9445C19-EFCD-4035-871E-C4DAD6F87A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9445C19-EFCD-4035-871E-C4DAD6F87A9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
