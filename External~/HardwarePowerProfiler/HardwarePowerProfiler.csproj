@@ -13,11 +13,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <BuildFiles Include="bin\Debug\**\*.*"/>
+        <BuildFiles Include="bin\Release\net8.0\*.*"/>
     </ItemGroup>
 
     <Target Name="CopyBuildFiles" AfterTargets="Build">
-        <Copy SourceFiles="@(BuildFiles)" DestinationFolder="..\..\Runtime\Packages"/>
+        <Copy SourceFiles="@(BuildFiles)" DestinationFolder="..\..\Runtime\Programs~\HardwarePowerProfiler"/>
     </Target>
 
 </Project>
