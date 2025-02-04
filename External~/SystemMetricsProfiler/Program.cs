@@ -11,7 +11,7 @@ internal static class Program
         Process process = Process.GetProcessById(int.Parse(args[0]));
         process.Exited += ProcessExited;
         ProcessDataCollector processDataCollector = new(process);
-        processDataCollector.GetProcessMetrics(); // TODO
+        processDataCollector.ProfileProcessMetrics();
     }
 
     private static void ProcessExited(object? sender, EventArgs e)
