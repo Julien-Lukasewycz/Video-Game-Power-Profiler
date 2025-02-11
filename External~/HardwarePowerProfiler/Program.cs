@@ -22,7 +22,7 @@ internal static class Program
             content = $"{DateTime.Now:dd:MM:yyyy HH:mm:ss:fff};";
             foreach (float cpuCore in data.CpuCores)
             {
-                content += cpuCore + ";";
+                content += $"{cpuCore};";
             }
             content += $"{data.CpuPackage};{data.CpuPPT};{data.CpuCorePower};{data.CpuSocPower};{data.CpuMiscPower};{data.CpuTotalPower};{data.IGpuCore};{data.IGpuSoc};{data.GpuPackage}\r\n";
             await File.AppendAllTextAsync(path, content);
