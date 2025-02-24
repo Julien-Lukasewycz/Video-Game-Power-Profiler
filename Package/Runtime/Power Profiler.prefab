@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8327398688756875871}
   - component: {fileID: 1662423041779059115}
+  - component: {fileID: 864580220432464457}
   - component: {fileID: 600599210350141303}
   m_Layer: 0
   m_Name: Power Profiler
@@ -43,6 +44,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c72d9930a96caa489a5dfd61433dab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &864580220432464457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476697791615246084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55e329581d07f749ba17ccd8d3609ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &600599210350141303
