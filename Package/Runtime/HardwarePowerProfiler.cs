@@ -9,7 +9,7 @@ namespace PowerProfiler.Runtime
         
         private void Awake()
         {
-            process.StartInfo.FileName = "Assets\\Power Profiler\\External~\\HardwarePowerProfiler\\bin\\Release\\net8.0\\HardwarePowerProfiler.exe"; // TODO use published files
+            process.StartInfo.FileName = "Assets\\Power Profiler\\Package\\External~\\HardwarePowerProfiler\\bin\\Release\\net8.0\\HardwarePowerProfiler.exe"; // TODO use published files
             process.StartInfo.UseShellExecute = true;
             process.StartInfo.Verb = "runas";
             process.Start();
