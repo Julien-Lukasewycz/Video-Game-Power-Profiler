@@ -4,7 +4,7 @@ using UnityEngine.Profiling;
 
 namespace PowerProfiler.Runtime
 {
-    public class ProfilerDataCollector : MonoBehaviour
+    internal class ProfilerDataCollector : MonoBehaviour
     {
         private int frameCount;
         
