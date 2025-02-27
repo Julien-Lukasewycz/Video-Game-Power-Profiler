@@ -7,11 +7,14 @@ internal class ProcessDataCollector(Process process)
 {
     [SupportedOSPlatform("windows")]
     private readonly PerformanceCounter cpuCounter = new("Process", "% Processor Time", GetProcessInstanceName(process.Id), true);
+    [SupportedOSPlatform("windows")]
+    private readonly PerformanceCounter totalCpuCounter = new("Processor Information", "% Processor Utility", "_Total", true);
     private UtilizationData utilizationData = new();
     
     [SupportedOSPlatform("windows")]
     internal void StartCollecting()
     {
+        _ = totalCpuCounter.NextValue();
         _ = cpuCounter.NextValue();
         // TODO
         Thread.Sleep(1000);
@@ -21,6 +24,7 @@ internal class ProcessDataCollector(Process process)
     internal UtilizationData GetData()
     {
         utilizationData.CpuCores.Clear();
+        utilizationData.totalCpu = totalCpuCounter.NextValue();
         utilizationData.Cpu = cpuCounter.NextValue() / Environment.ProcessorCount;
         // TODO
         return utilizationData;
