@@ -89,12 +89,12 @@ namespace PowerProfiler.Editor
 
         private static async void AnalyzeFile()
         {
-            Dictionary<ushort, string> categoryIdToName = new();
+            Dictionary<int, string> categoryIdToName = new();
             float[] categoryUtilization = new float[13];
             List<ProfilerCategoryInfo> categories = new();
             for (int i = ProfilerDriver.firstFrameIndex; i <= ProfilerDriver.lastFrameIndex; i++)
             {
-                using (HierarchyFrameDataView hierarchyFrameDataView = ProfilerDriver.GetHierarchyFrameDataView(i, 0, HierarchyFrameDataView.ViewModes.InvertHierarchy, HierarchyFrameDataView.columnDontSort, false))
+                using (HierarchyFrameDataView hierarchyFrameDataView = ProfilerDriver.GetHierarchyFrameDataView(i, 0, HierarchyFrameDataView.ViewModes.MergeSamplesWithTheSameName, HierarchyFrameDataView.columnDontSort, false))
                 {
                     hierarchyFrameDataView.GetAllCategories(categories);
                     foreach (ProfilerCategoryInfo category in categories)
@@ -102,23 +102,108 @@ namespace PowerProfiler.Editor
                         categoryIdToName.Add(category.id, category.name);
                     }
                     List<int> childrenIds = new();
-                    hierarchyFrameDataView.GetItemChildren(0, childrenIds);
-                    Queue<int> childrenToVisit = new();
+                    hierarchyFrameDataView.GetItemChildren(hierarchyFrameDataView.GetRootItemID(), childrenIds);
+                    Queue<Vector2Int> childrenToVisit = new();
                     foreach (int childId in childrenIds)
                     {
-                        childrenToVisit.Enqueue(childId);
+                        childrenToVisit.Enqueue(new Vector2Int(childId, 9));
                     }
                     while (childrenToVisit.Count > 0)
                     {
-                        int childId = childrenToVisit.Dequeue();
-                        ushort categoryId = hierarchyFrameDataView.GetItemCategoryIndex(childId);
+                        Vector2Int childId = childrenToVisit.Dequeue();
+                        int categoryId = hierarchyFrameDataView.GetItemCategoryIndex(childId.x);
                         if (categoryIdToName[categoryId] == "Internal")
                         {
-                            List<int> newChildrenToVisit = new();
-                            hierarchyFrameDataView.GetItemChildren(childId, newChildrenToVisit);
-                            foreach (int newChildId in newChildrenToVisit)
+                            categoryId = childId.y;
+                        }
+                        string categoryName = categoryIdToName[categoryId];
+                        bool hasMapping = CategoryMapping.TryGetValue(categoryName, out categoryId);
+                        if (!hasMapping)
+                        {
+                            categoryId = 9;
+                            Debug.LogWarning($"Missing Category Mapping for {categoryName}");
+                        }
+                        categoryUtilization[categoryId] += hierarchyFrameDataView.GetItemColumnDataAsFloat(childId.x, HierarchyFrameDataView.columnSelfPercent);
+                        //else
+                       // {
+                            /*int parent = childId;
+                            do
                             {
-                                childrenToVisit.Enqueue(newChildId);
+                                List<int> parents = new();
+                                hierarchyFrameDataView.GetItemAncestors(parent, parents);
+                                if (parents.Count == 0)
+                                {
+                                    parent = categoryId;
+                                    break;
+                                }
+                                parent = parents[0];
+                            } while (categoryIdToName[hierarchyFrameDataView.GetItemCategoryIndex(parent)] != "Internal");
+                            string categoryName = categoryIdToName[hierarchyFrameDataView.GetItemCategoryIndex(parent)];
+                            bool hasMapping = CategoryMapping.TryGetValue(categoryName, out int categoryIndex);
+                            if (!hasMapping)
+                            {
+                                categoryIndex = 9;
+                            }
+                            categoryUtilization[categoryIndex] += hierarchyFrameDataView.GetItemColumnDataAsFloat(childId, HierarchyFrameDataView.columnSelfPercent);*/
+                        //}
+                        /*else
+                        {
+                            List<int> parents = new();
+                            hierarchyFrameDataView.GetItemAncestors(childId, parents);
+                            foreach (int parent in parents)
+                            {
+                                parentsToVisit.Enqueue(parent);
+                            }
+                        }*/
+                        List<int> children = new();
+                        hierarchyFrameDataView.GetItemChildren(childId.x, children);
+                        foreach (int child in children)
+                        {
+                            if (categoryIdToName[hierarchyFrameDataView.GetItemCategoryIndex(childId.x)] == "Internal")
+                            {
+                                childrenToVisit.Enqueue(new Vector2Int(child, childId.y));
+                            }
+                            else
+                            {
+                                childrenToVisit.Enqueue(new Vector2Int(child, hierarchyFrameDataView.GetItemCategoryIndex(childId.x)));
+                            }
+                        }
+                    }
+                    /*List<int> leafs = new();
+                    while (childrenToVisit.Count > 0)
+                    {
+                        int childId = childrenToVisit.Dequeue();
+                        List<int> children = new();
+                        hierarchyFrameDataView.GetItemChildren(childId, children);
+                        if (children.Count == 0)
+                        {
+                            leafs.Add(childId);
+                        }
+                        else
+                        {
+                            foreach (int child in children)
+                            {
+                                childrenToVisit.Enqueue(child);
+                            }
+                        }
+                    }
+                    childrenToVisit.Clear();
+                    foreach (int leaf in leafs)
+                    {
+                        childrenToVisit.Enqueue(leaf);
+                        Debug.Log(hierarchyFrameDataView.GetItemName(leaf));
+                    }*/
+                    /*while (parentsToVisit.Count > 0)
+                    {
+                        int parentId = parentsToVisit.Dequeue();
+                        ushort categoryId = hierarchyFrameDataView.GetItemCategoryIndex(parentId);
+                        if (categoryIdToName[categoryId] == "Internal")
+                        {
+                            List<int> newParentsToVisit = new();
+                            hierarchyFrameDataView.GetItemAncestors(parentId, newParentsToVisit);
+                            foreach (int newParentId in newParentsToVisit)
+                            {
+                                parentsToVisit.Enqueue(newParentId);
                             }
                         }
                         else
@@ -130,9 +215,9 @@ namespace PowerProfiler.Editor
                                 categoryIndex = 9;
                                 Debug.LogWarning($"Missing Category Mapping for {categoryName}");
                             }
-                            categoryUtilization[categoryIndex] += hierarchyFrameDataView.GetItemColumnDataAsFloat(childId, HierarchyFrameDataView.columnSelfPercent);
+                            categoryUtilization[categoryIndex] += hierarchyFrameDataView.GetItemColumnDataAsFloat(parentId, HierarchyFrameDataView.columnSelfPercent);
                         }
-                    }
+                    }*/
                     FrameIndex++;
                     string content = $"{FrameIndex};{hierarchyFrameDataView.frameTimeMs:F3};{hierarchyFrameDataView.frameFps:F2}";
                     foreach (float utilization in categoryUtilization)
