@@ -11,10 +11,10 @@ internal static class Program
         Process process = Process.GetProcessById(int.Parse(args[0]));
         ProcessDataCollector processDataCollector = new(process);
         processDataCollector.StartCollecting();
-        PeriodicTimer periodicTimer = new(TimeSpan.FromSeconds(1 / 120));
+        PeriodicTimer periodicTimer = new(TimeSpan.FromMilliseconds(8));
         Directory.CreateDirectory("Benchmark");
         string path = $"Benchmark/ProcessUtilizationData {DateTime.Now:dd-MM-yyyy HH-mm-ss}.csv";
-        string content = "Time;";
+        string content = "Time;TotalCPU;";
         for (int i = 1; i <= 16; i++)
         {
             content += $"CpuCoreUtilization{i};";
@@ -24,12 +24,12 @@ internal static class Program
         while (await periodicTimer.WaitForNextTickAsync())
         {
             UtilizationData utilizationData = processDataCollector.GetData();
-            content = $"{DateTime.Now:dd:MM:yyyy HH:mm:ss:fff};";
+            content = $"{DateTime.Now:dd:MM:yyyy HH:mm:ss:fff};{utilizationData.totalCpu};";
             foreach (float cpuCoreUtilization in utilizationData.CpuCores)
             {
                 content += $"{cpuCoreUtilization};";
             }
-            content += $"{utilizationData.Cpu};\r\n";
+            content += $"{utilizationData.Cpu}\r\n";
             await File.AppendAllTextAsync(path, content);
         }
     }

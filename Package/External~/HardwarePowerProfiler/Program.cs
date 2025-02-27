@@ -6,7 +6,7 @@ internal static class Program
     {
         PowerDataCollector collector = new();
         collector.StartCollecting();
-        PeriodicTimer periodicTimer = new(TimeSpan.FromSeconds(1 / 120));
+        PeriodicTimer periodicTimer = new(TimeSpan.FromMilliseconds(8));
         Directory.CreateDirectory("Benchmark");
         string path = $"Benchmark/HardwarePowerData {DateTime.Now:dd-MM-yyyy HH-mm-ss}.csv";
         string content = "Time;";
