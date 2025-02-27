@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -13,6 +14,8 @@ namespace PowerProfiler.Runtime
             Profiler.logFile = $"Benchmark/ProfilerData {DateTime.Now:dd-MM-yyyy HH-mm-ss-ffffff}.raw";
             Profiler.enableBinaryLog = true;
             Profiler.enabled = true;
+            EditorApplication.isPaused = true;
+            // TODO resume after delay
         }
 
         private void Update()
