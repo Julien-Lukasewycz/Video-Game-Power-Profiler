@@ -11,7 +11,7 @@ internal static class Program
         Process process = Process.GetProcessById(int.Parse(args[0]));
         ProcessDataCollector processDataCollector = new(process);
         processDataCollector.StartCollecting();
-        PeriodicTimer periodicTimer = new(TimeSpan.FromSeconds(1)); // TODO set measurement interval
+        PeriodicTimer periodicTimer = new(TimeSpan.FromSeconds(1 / 120));
         Directory.CreateDirectory("Benchmark");
         string path = $"Benchmark/ProcessUtilizationData {DateTime.Now:dd-MM-yyyy HH-mm-ss}.csv";
         string content = "Time;";
