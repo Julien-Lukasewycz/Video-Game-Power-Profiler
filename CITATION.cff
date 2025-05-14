@@ -1,0 +1,30 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Video Game Power Profiler
+message: >-
+  If you use this software, please cite it using the metadata from this file.
+type: software
+authors:
+  - given-names: Julien
+    family-names: Lukasewycz
+    email: julien.lukasewycz@uni-due.de
+    affiliation: University of Duisburg-Essen
+    orcid: 'https://orcid.org/0000-0002-6850-4788'
+identifiers:
+  - type: url
+    value: >-
+      https://github.com/Julien-Lukasewycz/Video-Game-Power-Profiler
+repository-code: >-
+  https://github.com/Julien-Lukasewycz/Video-Game-Power-Profiler
+keywords:
+  - green gaming
+  - power consumption
+  - power measurement
+  - power model
+  - power visualization
+  - sustainability
+  - tool support
+  - video game engines
+  - video games
