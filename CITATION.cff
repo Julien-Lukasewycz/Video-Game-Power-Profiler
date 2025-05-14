@@ -1,28 +1,32 @@
 authors:
-  - affiliation: University of Duisburg-Essen
-    email: julien.lukasewycz@uni-due.de
-    family-names: Lukasewycz
-    given-names: Julien
+  - affiliation: "University of Duisburg-Essen"
+    city: "Duisburg"
+    country: DE
+    email: "julien.lukasewycz@uni-due.de"
+    family-names: "Lukasewycz"
+    given-names: "Julien"
     orcid: "https://orcid.org/0000-0002-6850-4788"
 cff-version: 1.2.0
 contact:
-  - affiliation: University of Duisburg-Essen
-    email: julien.lukasewycz@uni-due.de
-    family-names: Lukasewycz
-    given-names: Julien
+  - affiliation: "University of Duisburg-Essen"
+    city: "Duisburg"
+    country: DE
+    email: "julien.lukasewycz@uni-due.de"
+    family-names: "Lukasewycz"
+    given-names: "Julien"
     orcid: "https://orcid.org/0000-0002-6850-4788"
 keywords:
-  - green gaming
-  - power consumption
-  - power measurement
-  - power model
-  - power visualization
-  - sustainability
-  - tool support
-  - video game engines
-  - video games
+  - "green gaming"
+  - "power consumption"
+  - "power measurement"
+  - "power model"
+  - "power visualization"
+  - "sustainability"
+  - "tool support"
+  - "video game engines"
+  - "video games"
 message: "If you use this software, please cite it using the metadata from this file."
 repository-code: "https://github.com/Julien-Lukasewycz/Video-Game-Power-Profiler"
-title: Video Game Power Profiler
+title: "Video Game Power Profiler"
 type: software
 url: "https://github.com/Julien-Lukasewycz/Video-Game-Power-Profiler"
