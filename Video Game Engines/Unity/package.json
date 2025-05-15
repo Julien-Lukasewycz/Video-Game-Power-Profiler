@@ -1,0 +1,21 @@
+{
+  "name": "",
+  "version": "0.0.0",
+  "description": "",
+  "displayName": "",
+  "unity": "",
+  "author": {
+    "name": "Julien Lukasewycz",
+    "email": "julien.lukasewycz@uni-due.de",
+    "url": "https://orcid.org/0000-0002-6850-4788"
+  },
+  "changelogUrl": "",
+  "dependencies": {},
+  "documentationUrl": "",
+  "hideInEditor": true,
+  "keywords": [],
+  "license": "",
+  "licensesUrl": "",
+  "samples": [],
+  "unityRelease": ""
+}
