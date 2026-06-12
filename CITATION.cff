@@ -7,26 +7,32 @@ authors:
     given-names: "Julien"
     orcid: "https://orcid.org/0000-0002-6850-4788"
 cff-version: 1.2.0
+commit: "ffcfff3a5851579f93ff2465e4f523ba2448df9d"
 contact:
-  - affiliation: "University of Duisburg-Essen"
+  - address: "Bismarckstrasse 90"
+    affiliation: "University of Duisburg-Essen"
     city: "Duisburg"
     country: DE
     email: "julien.lukasewycz@uni-due.de"
     family-names: "Lukasewycz"
     given-names: "Julien"
     orcid: "https://orcid.org/0000-0002-6850-4788"
+    post-code: 47057
+date-released: "2026-06-12"
 keywords:
+  - "environmental sustainability"
   - "green gaming"
   - "power consumption"
   - "power measurement"
   - "power model"
   - "power visualization"
-  - "sustainability"
   - "tool support"
   - "video game engines"
   - "video games"
+license: BSD-3-Clause
+license-url: "https://github.com/Julien-Lukasewycz/Video-Game-Power-Profiler/blob/main/LICENSE.txt"
 message: "If you use this software, please cite it using the metadata from this file."
-repository-code: "https://github.com/Julien-Lukasewycz/Video-Game-Power-Profiler"
+repository: "https://github.com/Julien-Lukasewycz/Video-Game-Power-Profiler"
 title: "Video Game Power Profiler"
 type: software
-url: "https://github.com/Julien-Lukasewycz/Video-Game-Power-Profiler"
+version: 0.0.0
