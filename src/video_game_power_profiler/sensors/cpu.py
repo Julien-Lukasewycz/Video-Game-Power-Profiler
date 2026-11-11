@@ -25,7 +25,8 @@ class Cpu():
         self.__cpu_hardware = cpu_hardware
         self.__power_sensor_total = None
         self.__power_sensors_cores = []
-        for sensor in cpu_hardware.Sensors:
+        self.__cpu_hardware.Update()
+        for sensor in self.__cpu_hardware.Sensors:
             if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Package"):
                 self.__power_sensor_total = sensor
             elif sensor.SensorType == SensorType.Power and sensor.Name.startswith("Core"):
