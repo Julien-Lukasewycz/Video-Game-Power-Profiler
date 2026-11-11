@@ -1,7 +1,9 @@
 [project]
 name = "video-game-power-profiler"
 version = "0.0.0"
-dependencies = []
+dependencies = [
+    "pythonnet"
+]
 requires-python = ">= 3.14"
 authors = [
     { name = "Julien Lukasewycz", email = "julien.lukasewycz@uni-due.de" }
