@@ -26,11 +26,8 @@ class Cpu():
         self.__power_sensor_total = None
         self.__power_sensors_cores = []
         self.__cpu_hardware.Update()
-        for sensor in self.__cpu_hardware.Sensors:
-            if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Package"):
-                self.__power_sensor_total = sensor
-            elif sensor.SensorType == SensorType.Power and sensor.Name.startswith("Core"):
-                self.__power_sensors_cores.append(sensor)
+        self.__power_sensor_total = next((sensor for sensor in self.__cpu_hardware.Sensors if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Package")), None)
+        self.__power_sensors_cores = [sensor for sensor in self.__cpu_hardware.Sensors if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Core")]
 
     def get_data(self) -> CpuData:
         self.__cpu_hardware.Update()
