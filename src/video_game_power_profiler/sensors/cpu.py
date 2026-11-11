@@ -23,8 +23,6 @@ class Cpu():
 
     def __init__(self, cpu_hardware: Any) -> None: # TODO type
         self.__cpu_hardware = cpu_hardware
-        self.__power_sensor_total = None
-        self.__power_sensors_cores = []
         self.__cpu_hardware.Update()
         self.__power_sensor_total = next((sensor for sensor in self.__cpu_hardware.Sensors if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Package")), None)
         self.__power_sensors_cores = [sensor for sensor in self.__cpu_hardware.Sensors if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Core")]
