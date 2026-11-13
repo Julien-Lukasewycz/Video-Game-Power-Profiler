@@ -34,5 +34,5 @@ class Cpu():
         cpu_power_total: float = self.__power_sensor_total.Value
         cpu_power_cores: list[float] = [sensor.Value for sensor in self.__power_sensors_cores]
         cpu_power_misc: float = cpu_power_total - sum(cpu_power_cores)
-        cpu_data = CpuData(cpu_power_total, cpu_power_cores, cpu_power_misc)
+        cpu_data: CpuData = CpuData(cpu_power_total, cpu_power_cores, cpu_power_misc)
         return cpu_data
