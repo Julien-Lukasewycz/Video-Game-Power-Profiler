@@ -10,10 +10,12 @@ from LibreHardwareMonitor.Hardware import SensorType
 class CpuData():
     cpu_power_total: float
     cpu_power_cores: list[float]
+    cpu_power_misc: float
 
-    def __init__(self, cpu_power_total: float, cpu_power_cores: list[float]) -> None:
+    def __init__(self, cpu_power_total: float, cpu_power_cores: list[float], cpu_power_misc: float) -> None:
         self.cpu_power_total = cpu_power_total
         self.cpu_power_cores = cpu_power_cores
+        self.cpu_power_misc = cpu_power_misc
 
 
 class Cpu():
@@ -29,7 +31,8 @@ class Cpu():
 
     def get_data(self) -> CpuData:
         self.__cpu_hardware.Update()
-        power_total: float = self.__power_sensor_total.Value
-        power_cores: list[float] = [sensor.Value for sensor in self.__power_sensors_cores]
-        cpu_data = CpuData(power_total, power_cores)
+        cpu_power_total: float = self.__power_sensor_total.Value
+        cpu_power_cores: list[float] = [sensor.Value for sensor in self.__power_sensors_cores]
+        cpu_power_misc: float = cpu_power_total - sum(cpu_power_cores)
+        cpu_data = CpuData(cpu_power_total, cpu_power_cores, cpu_power_misc)
         return cpu_data
