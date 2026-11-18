@@ -18,7 +18,7 @@ class CpuData():
         self.cpu_power_misc = cpu_power_misc
 
     def to_csv(self) -> str:
-        return(f"{self.cpu_power_total};{";".join(list(map(str, self.cpu_power_cores)))};{self.cpu_power_misc}")
+        return f"{self.cpu_power_total};{";".join(list(map(str, self.cpu_power_cores)))};{self.cpu_power_misc}"
 
 
 class Cpu():
@@ -29,7 +29,7 @@ class Cpu():
     def __init__(self, cpu_hardware: Any) -> None: # TODO type
         self.__cpu_hardware = cpu_hardware
         self.__cpu_hardware.Update()
-        self.__power_sensor_total = next((sensor for sensor in self.__cpu_hardware.Sensors if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Package")), None)
+        self.__power_sensor_total = next((sensor for sensor in self.__cpu_hardware.Sensors if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Package")))
         self.__power_sensors_cores = [sensor for sensor in self.__cpu_hardware.Sensors if sensor.SensorType == SensorType.Power and sensor.Name.startswith("Core")]
 
     def get_data(self) -> CpuData:
