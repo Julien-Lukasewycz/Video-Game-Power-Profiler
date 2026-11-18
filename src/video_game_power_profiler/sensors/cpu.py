@@ -17,6 +17,9 @@ class CpuData():
         self.cpu_power_cores = cpu_power_cores
         self.cpu_power_misc = cpu_power_misc
 
+    def to_csv(self) -> str:
+        return(f"{self.cpu_power_total};{";".join(list(map(str, self.cpu_power_cores)))};{self.cpu_power_misc}")
+
 
 class Cpu():
     __cpu_hardware: Any # TODO type
