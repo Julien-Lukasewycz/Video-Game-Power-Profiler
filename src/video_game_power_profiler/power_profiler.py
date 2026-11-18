@@ -1,4 +1,9 @@
 from dataclasses import dataclass
+from typing import Any
+import clr
+
+clr.AddReference("LibreHardwareMonitorLib")
+from LibreHardwareMonitor.Hardware import Computer
 
 
 @dataclass
@@ -17,13 +22,20 @@ class ProfilerData():
 
 
 class PowerProfiler():
-    configuration: PowerProfilerConfiguration
+    __computer: Any = Computer() # TODO type
+    __computer.IsCpuEnabled = True
+    __computer.IsGpuEnabled = True
+    __computer.IsMemoryEnabled = True
+    __computer.IsStorageEnabled = True
+    __configuration: PowerProfilerConfiguration
 
     def __init__(self, configuration: PowerProfilerConfiguration) -> None:
-        self.configuration = configuration
+        self.__configuration = configuration
 
-    def start_profiling(self):
+    def start_profiling(self, process_id: int) -> None:
+        self.__computer.Open()
         pass # TODO
 
-    def stop_profiling(self):
+    def stop_profiling(self) -> None:
+        self.__computer.Close()
         pass # TODO
