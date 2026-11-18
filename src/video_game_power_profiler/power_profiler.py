@@ -49,7 +49,7 @@ class PowerProfiler():
         cpu_hardware = next((hardware for hardware in self.__computer.Hardware if hardware.HardwareType == HardwareType.Cpu))
         cpu = Cpu(cpu_hardware)
         gpu_hardware = next((hardware for hardware in self.__computer.Hardware if hardware.HardwareType == HardwareType.GpuNvidia))
-        gpu = Gpu(gpu_hardware)
+        gpu = Gpu(process_id, gpu_hardware)
         self.__profiling_thread_kill_flag = False
         self.__profiling_thread = Thread(target=self.profile, args=(cpu, gpu,))
         self.__profiling_thread.start()

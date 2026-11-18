@@ -2,6 +2,7 @@
 name = "video-game-power-profiler"
 version = "0.0.0"
 dependencies = [
+    "nvitop",
     "pythonnet"
 ]
 requires-python = ">= 3.14"
