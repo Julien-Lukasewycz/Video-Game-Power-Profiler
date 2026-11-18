@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+from io import TextIOWrapper
+import os
 from threading import Thread
 from typing import Any
 import clr
@@ -29,14 +31,17 @@ class PowerProfiler():
     __computer.IsMemoryEnabled = True
     __computer.IsStorageEnabled = True
     __configuration: PowerProfilerConfiguration
+    __output_file: TextIOWrapper
     __profiling_thread: Thread = Thread()
     __profiling_thread_kill_flag: bool = True
 
     def __init__(self, configuration: PowerProfilerConfiguration) -> None:
         self.__configuration = configuration
 
-    def start_profiling(self, process_id: int) -> None:
+    def start_profiling(self, process_id: int, file_name: str) -> None:
         self.__computer.Open()
+        os.makedirs(f"{self.__configuration.working_directory_path}Data/", exist_ok=True)
+        self.__output_file = open(f"{self.__configuration.working_directory_path}Data/{file_name}.csv", "w")
         self.__profiling_thread_kill_flag = False
         self.__profiling_thread = Thread(target=self.profile)
         self.__profiling_thread.start()
@@ -48,4 +53,5 @@ class PowerProfiler():
     def stop_profiling(self) -> None:
         self.__profiling_thread_kill_flag = True
         self.__profiling_thread.join()
+        self.__output_file.close()
         self.__computer.Close()
