@@ -2,11 +2,14 @@ from dataclasses import dataclass
 from io import TextIOWrapper
 import os
 from threading import Thread
+import time
 from typing import Any
 import clr
 
+from video_game_power_profiler.sensors.cpu import Cpu, CpuData
+
 clr.AddReference("LibreHardwareMonitorLib")
-from LibreHardwareMonitor.Hardware import Computer
+from LibreHardwareMonitor.Hardware import Computer, HardwareType
 
 
 @dataclass
@@ -42,13 +45,18 @@ class PowerProfiler():
         self.__computer.Open()
         os.makedirs(f"{self.__configuration.working_directory_path}Data/", exist_ok=True)
         self.__output_file = open(f"{self.__configuration.working_directory_path}Data/{file_name}.csv", "w")
+        cpu_hardware = next((hardware for hardware in self.__computer.Hardware if hardware.HardwareType == HardwareType.Cpu), None)
+        cpu = Cpu(cpu_hardware)
         self.__profiling_thread_kill_flag = False
-        self.__profiling_thread = Thread(target=self.profile)
+        self.__profiling_thread = Thread(target=self.profile, args=(cpu,))
         self.__profiling_thread.start()
 
-    def profile(self) -> None:
+    def profile(self, cpu: Cpu) -> None:
+        cpu_data: CpuData
         while(not(self.__profiling_thread_kill_flag)):
-            pass # TODO
+            cpu_data = cpu.get_data()
+            self.__output_file.write(f"{cpu_data.to_csv()}\n")
+            time.sleep(1 / self.__configuration.polling_rate)
 
     def stop_profiling(self) -> None:
         self.__profiling_thread_kill_flag = True
