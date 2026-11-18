@@ -11,6 +11,11 @@ class PowerProfilerConfiguration():
         self.polling_rate = polling_rate
 
 
+@dataclass
+class ProfilerData():
+    pass # TODO
+
+
 class PowerProfiler():
     configuration: PowerProfilerConfiguration
 
