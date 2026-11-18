@@ -16,10 +16,12 @@ from LibreHardwareMonitor.Hardware import Computer, HardwareType
 @dataclass
 class PowerProfilerConfiguration():
     working_directory_path: str
+    presentmon_path: str
     polling_rate: int
 
-    def __init__(self, working_directory_path: str, polling_rate: int) -> None:
+    def __init__(self, working_directory_path: str, presentmon_path: str, polling_rate: int) -> None:
         self.working_directory_path = working_directory_path
+        self.presentmon_path = presentmon_path
         self.polling_rate = polling_rate
 
 
