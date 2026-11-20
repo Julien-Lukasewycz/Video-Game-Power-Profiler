@@ -16,4 +16,5 @@ class VideoGameData():
 
 class VideoGame():
     def get_data(self) -> VideoGameData:
-        return VideoGameData() # TODO
+        with self.__video_game_data_lock:
+            return self.__video_game_data
