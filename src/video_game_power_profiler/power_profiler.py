@@ -52,7 +52,7 @@ class PowerProfiler():
         os.makedirs(f"{self.__configuration.working_directory_path}Data/", exist_ok=True)
         self.__output_file = open(f"{self.__configuration.working_directory_path}Data/{file_name}.csv", "w")
         cpu_hardware = next((hardware for hardware in self.__computer.Hardware if hardware.HardwareType == HardwareType.Cpu))
-        cpu = Cpu(cpu_hardware)
+        cpu = Cpu(process_id, cpu_hardware)
         gpu_hardware = next((hardware for hardware in self.__computer.Hardware if hardware.HardwareType == HardwareType.GpuNvidia))
         gpu = Gpu(process_id, gpu_hardware)
         video_game = VideoGame(process_id, self.__configuration.presentmon_service_path, self.__configuration.presentmon_service_dll_path)
