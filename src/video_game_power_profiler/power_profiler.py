@@ -55,10 +55,10 @@ class PowerProfiler():
         gpu = Gpu(process_id, gpu_hardware)
         video_game = VideoGame(process_id, self.__configuration.presentmon_path)
         self.__profiling_thread_kill_flag = False
-        self.__profiling_thread = Thread(target=self.profile, args=(cpu, gpu, video_game))
+        self.__profiling_thread = Thread(target=self.__profile, args=(cpu, gpu, video_game))
         self.__profiling_thread.start()
 
-    def profile(self, cpu: Cpu, gpu: Gpu, video_game: VideoGame) -> None:
+    def __profile(self, cpu: Cpu, gpu: Gpu, video_game: VideoGame) -> None:
         cpu_data: CpuData
         gpu_data: GpuData
         video_game_data: VideoGameData
