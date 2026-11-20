@@ -41,7 +41,7 @@ class PowerProfiler():
     __computer.IsStorageEnabled = True
     __configuration: PowerProfilerConfiguration
     __output_file: TextIOWrapper
-    __profiling_thread: Thread = Thread()
+    __profiling_thread: Thread
     __profiling_thread_kill_flag: bool = True
 
     def __init__(self, configuration: PowerProfilerConfiguration) -> None:
