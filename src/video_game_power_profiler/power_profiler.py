@@ -8,6 +8,7 @@ import clr
 
 from video_game_power_profiler.sensors.cpu import Cpu, CpuData
 from video_game_power_profiler.sensors.gpu import Gpu, GpuData
+from video_game_power_profiler.sensors.video_game import VideoGame, VideoGameData
 
 clr.AddReference("LibreHardwareMonitorLib")
 from LibreHardwareMonitor.Hardware import Computer, HardwareType
@@ -52,17 +53,20 @@ class PowerProfiler():
         cpu = Cpu(cpu_hardware)
         gpu_hardware = next((hardware for hardware in self.__computer.Hardware if hardware.HardwareType == HardwareType.GpuNvidia))
         gpu = Gpu(process_id, gpu_hardware)
+        video_game = VideoGame(process_id, self.__configuration.presentmon_path)
         self.__profiling_thread_kill_flag = False
-        self.__profiling_thread = Thread(target=self.profile, args=(cpu, gpu,))
+        self.__profiling_thread = Thread(target=self.profile, args=(cpu, gpu, video_game))
         self.__profiling_thread.start()
 
-    def profile(self, cpu: Cpu, gpu: Gpu) -> None:
+    def profile(self, cpu: Cpu, gpu: Gpu, video_game: VideoGame) -> None:
         cpu_data: CpuData
         gpu_data: GpuData
+        video_game_data: VideoGameData
         while(not(self.__profiling_thread_kill_flag)):
             cpu_data = cpu.get_data()
             gpu_data = gpu.get_data()
-            self.__output_file.write(f"{cpu_data.to_csv()};{gpu_data.to_csv()}\n")
+            video_game_data = video_game.get_data()
+            self.__output_file.write(f"{cpu_data.to_csv()};{gpu_data.to_csv()};{video_game_data.to_csv()}\n")
             time.sleep(1 / self.__configuration.polling_rate)
 
     def stop_profiling(self) -> None:
