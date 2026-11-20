@@ -17,12 +17,14 @@ from LibreHardwareMonitor.Hardware import Computer, HardwareType
 @dataclass
 class PowerProfilerConfiguration():
     working_directory_path: str
-    presentmon_path: str
+    presentmon_service_path: str
+    presentmon_service_dll_path: str
     polling_rate: int
 
-    def __init__(self, working_directory_path: str, presentmon_path: str, polling_rate: int) -> None:
+    def __init__(self, working_directory_path: str, presentmon_service_path: str, presentmon_service_dll_path: str, polling_rate: int) -> None:
         self.working_directory_path = working_directory_path
-        self.presentmon_path = presentmon_path
+        self.presentmon_service_path = presentmon_service_path
+        self.presentmon_service_dll_path = presentmon_service_dll_path
         self.polling_rate = polling_rate
 
 
@@ -53,7 +55,7 @@ class PowerProfiler():
         cpu = Cpu(cpu_hardware)
         gpu_hardware = next((hardware for hardware in self.__computer.Hardware if hardware.HardwareType == HardwareType.GpuNvidia))
         gpu = Gpu(process_id, gpu_hardware)
-        video_game = VideoGame(process_id, self.__configuration.presentmon_path)
+        video_game = VideoGame(process_id, self.__configuration.presentmon_service_path, self.__configuration.presentmon_service_dll_path)
         self.__profiling_thread_kill_flag = False
         self.__profiling_thread = Thread(target=self.__profile, args=(cpu, gpu, video_game))
         self.__profiling_thread.start()
